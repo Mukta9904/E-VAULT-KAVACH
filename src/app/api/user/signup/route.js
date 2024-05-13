@@ -1,9 +1,9 @@
 import { connection } from "@/dbConfig/config";
-import { sendEmail } from "@/helpers/mailer";
 import { User, PasswordFolder, PaymentFolder, KeyFolder } from "@/models/userModel"; // Corrected imports
 import { NextResponse } from "next/server";
 import { encryptPassword } from "@/helpers/encryptPassword";
 import { randomBytes } from "crypto";
+
 connection();
 
 export async function POST(request) {

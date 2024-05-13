@@ -80,7 +80,7 @@ const Login = () => {
                 </label>
                 <div className=" W-full flex justify-center p-1 items-center">
                 <input
-                  className="bg-[#d4d4d5] appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="bg-[#F1F3F6] appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   name="email"
                   id="email"
                   type="text"

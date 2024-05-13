@@ -19,7 +19,7 @@ const Signup = () => {
   const onSubmit = async (data) => {
     setLoading(true); // Set loading to true when the submission starts
     try {
-      let response = await fetch("http://localhost:3000/api/user/signup", {
+      let response = await fetch("/api/user/signup", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(data)
