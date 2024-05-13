@@ -37,7 +37,6 @@ export async function GET(request) {
           }
           return NextResponse.json({data: arr})
       }
-      console.log(arr);
           return NextResponse.json({message: "No password found"})
     } catch (error) {
       console.error(error); // Log the error for debugging

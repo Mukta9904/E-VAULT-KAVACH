@@ -6,18 +6,23 @@ import { useEffect,useState } from 'react'
 const Navbar = () => {
     const [user, setuser] = useState({})
     const router = useRouter()
-      useEffect( () => {
-          async function fetchData (){
-              let a = await fetch("/api/user/profile", {method:"GET"}) 
-            let res = await a.json()
-            setuser(res.data)
-          }
-          fetchData()
-      },[])
+    useEffect(() => {
+      async function fetchData() {
+        let a = await fetch("/api/user/profile", { method: "GET" });
+        let res = await a.json();
+        // Check if the user data is not present, then redirect to login
+        if (!res.data) {
+          router.replace("/login");
+        } else {
+          setuser(res.data);
+        }
+      }
+      fetchData();
+    }, []);
+    
       const handleLogout = async ()=>{
           let a = await fetch("/api/user/logout", {method:"GET"}) 
           let res = await a.json()
-          console.log(res);
           if(res.message === "Logout successful"){
               router.replace("/login")
           }

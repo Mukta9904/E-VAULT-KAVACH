@@ -10,7 +10,6 @@ export async function POST(request){
     const reqBody = await request.json()
     const {email}= reqBody
     const user = await User.findOne({email: email})
-    console.log(user);
     if(!user){
         return NextResponse.json({message:"Invalid email"},{status: 400} )
     }

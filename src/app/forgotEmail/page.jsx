@@ -26,7 +26,6 @@ const Femail = () => {
         body: JSON.stringify(data)
       });
       let res = await response.json();
-      console.log(res.message);
       if(res.message === "Invalid email"){
         setError("email", { type: "manual", message: "Email doesn't exists" });
       } else {

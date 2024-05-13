@@ -17,11 +17,9 @@ const Verify = () => {
 
   const urlToken = new URLSearchParams(window.location.search).get('token');
   setToken(urlToken || "")
-  console.log(urlToken);
   try {
     let a = await fetch("http://localhost:3000/api/user/verifyEmail",{method:"POST", headers:{"Content-Type": "application/json"}, body: JSON.stringify({"token": token})})
     let res = await a.json()
-     console.log(res);
       if(res.message === "User verified successfully"){
         setVerify(true)
       }

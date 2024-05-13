@@ -15,15 +15,15 @@ export async function middleware(request) {
   if (isPublic && token) {
     // If the user is trying to access a public route and has a token, redirect to profile
     return NextResponse.redirect(new URL('/profile', request.url));
-  } else if (!isPublic && !token) {
+  } 
+  if (!isPublic && !token) {
     // If the user is trying to access a protected route without a token, redirect to login
     return NextResponse.redirect(new URL('/login', request.url));
   }
-
   // If none of the above conditions are met, continue with the request
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/login", "/signup", "/varifyemail", "/forgotpassword", "/forgotEmail", "/profile/:params"]
+  matcher: ["/login", "/signup", "/varifyemail", "/forgotpassword", "/forgotEmail", "/profile","/profile/payments"]
 };

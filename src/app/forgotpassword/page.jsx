@@ -31,15 +31,12 @@ const Fpassword = () => {
     try {
         const urlToken = new URLSearchParams(window.location.search).get('token');
         setToken(urlToken || "")
-        console.log(urlToken);
-        console.log(data);
         if(data.password !== data.confirmPassword){
             setError("cPassword", { type: "manual", message: "Password doesn't matches" });
     }
     else{
           let a = await fetch("http://localhost:3000/api/user/changepassword",{method:"POST", headers:{"Content-Type": "application/json"}, body: JSON.stringify({token: token, newPassword : data.password})})
                let res = await a.json()
-               console.log(res.message);
                if(res.message === "Password changed successfully"){
                 console.log("changed");
                 setSuccessfull(true);

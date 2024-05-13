@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 
 const Signup = () => {
   const [successfull, setSuccessfull] = useState(false)
+  const [showPassword, setShowPassword] = useState(true);
   const [loading, setLoading] = useState(false) // New state for loading status
 
   const {
@@ -25,7 +26,6 @@ const Signup = () => {
         body: JSON.stringify(data)
       });
       let res = await response.json();
-      console.log(res.message);
       if(res.message === "User already exist"){
         setError("email", { type: "manual", message: "Email already exists" });
       } else {
@@ -83,7 +83,7 @@ const Signup = () => {
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <g clip-path="url(#clip0_6_1284)">
+                      <g clipPath ="url(#clip0_6_1284)">
                         <path
                           d="M3 3H21C21.2652 3 21.5196 3.10536 21.7071 3.29289C21.8946 3.48043 22 3.73478 22 4V20C22 20.2652 21.8946 20.5196 21.7071 20.7071C21.5196 20.8946 21.2652 21 21 21H3C2.73478 21 2.48043 20.8946 2.29289 20.7071C2.10536 20.5196 2 20.2652 2 20V4C2 3.73478 2.10536 3.48043 2.29289 3.29289C2.48043 3.10536 2.73478 3 3 3ZM20 7.238L12.072 14.338L4 7.216V19H20V7.238ZM4.511 5L12.061 11.662L19.502 5H4.511Z"
                           fill="white"
@@ -115,15 +115,18 @@ const Signup = () => {
           </div>
           {errors.username && <div className=' text-sm text-red-500'>{errors.username.message}</div> }
       </div>
-      <div className="mb-6">
+      <div className="mb-6 ">
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
           Password
         </label>
-        <div className=" W-full flex justify-center p-1 items-center">
-        <input className="bg-[#F1F3F6] appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Password" {...register("password", {
+        <div className=" W-full flex justify-center p-1 relative items-center">
+        <input className="bg-[#F1F3F6] appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type={showPassword ? "text" : "password"} placeholder="Password" {...register("password", {
             required: { value: true, message: "Password is required" },
             minLength: { value: 6, message: "Min length is 6" },
           })}/>
+          <div onClick={() => {setShowPassword(!showPassword)}} className="h-6 w-6 absolute z-10 top-2 right-[50px] hover:cursor-pointer">
+              <img src={showPassword ? "/hide.png" : "/show.png"} alt="" />
+            </div>
           <div className="p-2 mb-[12px] w-[40px] h-[38px] flex justify-center items-center rounded-sm bg-[#1E2772]">
                     
                     <svg

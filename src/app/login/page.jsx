@@ -10,6 +10,7 @@ import Image from "next/image";
 
 const Login = () => {
   const [successful, setsuccessful] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
   const router = useRouter();
   const {
     register,
@@ -29,7 +30,6 @@ const Login = () => {
         body: JSON.stringify(data),
       });
       let res = await a.json();
-      console.log(res);
       if (
         res.message === "Email doesn't exist" ||
         res.message === "Incorrect password"
@@ -90,6 +90,7 @@ const Login = () => {
                     minLength: { value: 3, message: "Min length is 3" },
                   })}
                 />
+                
                 <div className="p-2 2 w-[40px] h-[38px] flex justify-center items-center rounded-sm bg-[#1E2772]">
                     <svg
                       width="24"
@@ -127,18 +128,21 @@ const Login = () => {
                 >
                   Password
                 </label>
-                <div className=" W-full flex justify-center p-1 items-center">
+                <div className=" W-full flex relative justify-center p-1 items-center">
                   <input
                     className=" appearance-none border rounded w-full py-2 px-3 bg-[#F1F3F6] text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                     id="password"
                     name="password"
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
                     {...register("password", {
                       required: { value: true, message: "This is required" },
                       minLength: { value: 6, message: "Min length is 6" },
                     })}
                   />
+                  <div onClick={() => {setShowPassword(!showPassword)}} className="h-6 w-6 absolute z-10 top-2 right-[50px] hover:cursor-pointer">
+              <img src={showPassword ? "/hide.png" : "/show.png"} alt="" />
+            </div>
                   <div className="p-2 mb-[12px] w-[40px] h-[38px] flex justify-center items-center rounded-sm bg-[#1E2772]">
                     
                     <svg

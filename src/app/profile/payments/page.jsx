@@ -14,15 +14,13 @@ const Payments = () => {
     async function fetchData() {
       let a = await fetch("/api/user/showPayments", { method: "GET" });
       let res = await a.json();
-      console.log(res.data);
+      
       setPayments(res.data);
     }
     fetchData();
   }, []);
 
   const handleShow = (obj) => {
-    console.log(obj);
-    console.log(obj._id || obj.id);
     setshowpayments(obj);
     setShow(!show);
     setCreate(false);
