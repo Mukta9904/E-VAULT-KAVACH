@@ -22,7 +22,6 @@ const PaymentForm = (props) => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(form);
     if (props.id) {
       const response = await fetch("/api/user/editPayment", {
         method: "PUT",
@@ -82,9 +81,9 @@ const PaymentForm = (props) => {
   const handleCopy = async (content) => {
     try {
       await navigator.clipboard.writeText(content);
-      console.log('Content copied to clipboard');
+      console.log("Content copied to clipboard");
     } catch (err) {
-      console.error('Failed to copy: ', err);
+      console.error("Failed to copy: ", err);
     }
   };
   const currentYear = new Date().getFullYear();
@@ -248,16 +247,16 @@ const PaymentForm = (props) => {
           )}
         </div>
 
-        {/* Card Holder's Name */}
+        {/* Card Holder"s Name */}
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            Card Holder's Name
+            Card Holder"s Name
           </label>
           <div className="relative">
           <input
             name="cardHolderName"
             {...register("cardHolderName", {
-              required: "Card holder's name is required",
+              required: "Card holders name is required",
             })}
             className="bg-[#F1F3F6] appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Name on the card"

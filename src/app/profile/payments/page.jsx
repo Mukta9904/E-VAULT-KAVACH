@@ -4,7 +4,7 @@ import PaymentForm from '@/app/components/savePayment/page'
 import { useState , useEffect} from 'react'
 import { paymentContext } from "@/context/context";
 
-const payments = () => {
+const Payments = () => {
   const [payments, setPayments] = useState([]);
   const [showPayments, setshowpayments] = useState({});
   const [create, setCreate] = useState(false);
@@ -126,4 +126,4 @@ const payments = () => {
   )
 }
 
-export default payments
+export default Payments

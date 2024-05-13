@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 
-const fpassword = () => {
+const Fpassword = () => {
   const router = useRouter()
     const [token, setToken] = useState("")
     const [successfull, setSuccessfull] = useState(false)
@@ -94,4 +94,4 @@ const fpassword = () => {
   )
 }
 
-export default fpassword
+export default Fpassword

@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 
-const femail = () => {
+const Femail = () => {
   const [successfull, setSuccessfull] = useState(false)
   const [loading, setLoading] = useState(false) // New state for loading status
 
@@ -76,4 +76,4 @@ const femail = () => {
   )
 }
 
-export default femail
+export default Femail
