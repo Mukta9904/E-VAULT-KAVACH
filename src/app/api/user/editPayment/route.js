@@ -9,7 +9,7 @@ connection()
 
 export async function PUT(request) {
     try {
-      const userId = await getTokenData(request)
+      const userId = request.userId
       const reqBody = await request.json()
       const { id , cardTitle, cardNumber ,expiryMonth , expiryYear, cvv, cardHolderName  } = reqBody;
       const keyFolderData = await KeyFolder.findOne({userId: userId})

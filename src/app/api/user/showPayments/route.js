@@ -7,7 +7,7 @@ connection();
 
 export async function GET(request) {
     try {
-      const userId = await getTokenData(request)
+      const userId = request.userId
       const keyFolderData = await KeyFolder.findOne({userId: userId})
       if(!keyFolderData) 
            return NextResponse.json({message:"Key not found"}, {status:400})

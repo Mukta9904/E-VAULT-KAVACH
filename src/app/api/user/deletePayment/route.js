@@ -7,7 +7,7 @@ connection();
 
 export async function DELETE(request) {
   try {
-    const userId = await getTokenData(request)
+    const userId = request.userId
     const reqBody = await request.json();
     const { id } = reqBody;
     const paymentFolder =  await PaymentFolder.findOne({user: userId })
