@@ -6,7 +6,6 @@ import { checkPasswordStrength } from "@/helpers/passwordStrength";
 import { generateStrongPassword } from "@/helpers/passwordGenerator";
 import { useRouter } from "next/navigation";
 import { userContext } from "@/context/context";
-import dynamic from 'next/dynamic';
 
 
 function PasswordManagerForm(props) {
@@ -67,7 +66,10 @@ function PasswordManagerForm(props) {
   // Update the generated password and its strength when the user types a password
   const handleWatch = (event) => {
     const newPassword = event.target.value;
-    setGeneratedPassword(newPassword);
+    setForm((prevForm) => ({
+      ...prevForm,
+      password: newPassword,
+    }));
     setPasswordStrength(checkPasswordStrength(newPassword));
   };
 
@@ -77,17 +79,19 @@ function PasswordManagerForm(props) {
 
   // Function to submit form data
   const onSubmit = async (data) => {
+    const postData = {
+      id: props.id,
+      siteName: data.siteName,
+      loginId: data.loginId,
+      password: generatedPassword,
+      siteUrl: data.siteUrl,
+    };
+  
     if (props.id) {
       const response = await fetch("/api/user/editpasswords", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id: props.id,
-          siteName: form.siteName,
-          loginId: form.loginId,
-          password: data.password,
-          siteUrl: form.siteUrl,
-        }),
+        body: JSON.stringify(postData),
       });
       let a = await fetch("/api/user/showpasswords", { method: "GET" });
       let res = await a.json();
@@ -96,10 +100,11 @@ function PasswordManagerForm(props) {
       value.create && value.setCreate(!value.create);
       return;
     }
+  
     const response = await fetch("/api/user/addPassword", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify(postData),
     });
     let a = await fetch("/api/user/showpasswords", { method: "GET" });
     let res = await a.json();
