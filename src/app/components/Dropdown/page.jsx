@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-export const Dropdown = ({ options, value, onChange, label }) => {
+const Dropdown = ({ options, value, onChange, label }) => {
     const [isOpen, setIsOpen] = useState(false);
   
     const handleSelect = (option) => {
@@ -32,4 +32,6 @@ export const Dropdown = ({ options, value, onChange, label }) => {
         )}
       </div>
     );
-  };
+};
+
+export default Dropdown; // Export Dropdown as default

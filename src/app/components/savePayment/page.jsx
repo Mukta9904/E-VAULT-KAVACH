@@ -4,7 +4,9 @@ import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { paymentContext } from "@/context/context";
 import { useContext } from "react";
-import { Dropdown } from "../Dropdown/page";
+import dynamic from 'next/dynamic'; // Import dynamic from Next.js
+const Dropdown = dynamic(() => import("../Dropdown/page"), { ssr: false }); // Import Dropdown dynamically and disable SSR
+
 const PaymentForm = (props) => {
   const value = useContext(paymentContext);
   const [form, setForm] = useState({
@@ -105,10 +107,10 @@ const PaymentForm = (props) => {
         </h2>
         <button
             className={`bg-white  border-2 box-border border-[#FD7401] hover:bg-[#FD7401] hover:text-white text-[#FD7401] font-bold py-1 px-2 rounded-full focus:outline-none focus:shadow-outline ${
-              value.show ? "inline-block" : "hidden"
+            value &&  value.show ? "inline-block" : "hidden"
             }`}
             onClick={() => {
-              value.setShow(false);
+            value &&  value.setShow(false);
             }}
           >
             Close
@@ -157,7 +159,7 @@ const PaymentForm = (props) => {
           />
           <svg
         xmlns="http://www.w3.org/2000/svg"
-        className={value.show?"h-6 w-6 absolute z-10 top-1 hover:scale-110 right-1 hover:cursor-pointer" : "hidden"}
+        className={value && value.show?"h-6 w-6 absolute z-10 top-1 hover:scale-110 right-1 hover:cursor-pointer" : "hidden"}
         fill="none"
         viewBox="0 0 24 24"
         stroke="black"
@@ -228,7 +230,7 @@ const PaymentForm = (props) => {
           />
           <svg
         xmlns="http://www.w3.org/2000/svg"
-        className={value.show?"h-6 w-6 absolute z-10 top-1 hover:scale-110 right-1 hover:cursor-pointer" : "hidden"}
+        className={value && value.show?"h-6 w-6 absolute z-10 top-1 hover:scale-110 right-1 hover:cursor-pointer" : "hidden"}
         fill="none"
         viewBox="0 0 24 24"
         stroke="black"
@@ -265,7 +267,7 @@ const PaymentForm = (props) => {
           />
           <svg
         xmlns="http://www.w3.org/2000/svg"
-        className={value.show?"h-6 w-6 absolute z-10 top-1 hover:scale-110 right-1 hover:cursor-pointer" : "hidden"}
+        className={value && value.show?"h-6 w-6 absolute z-10 top-1 hover:scale-110 right-1 hover:cursor-pointer" : "hidden"}
         fill="none"
         viewBox="0 0 24 24"
         stroke="black"
