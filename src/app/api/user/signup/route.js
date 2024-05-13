@@ -49,11 +49,7 @@ export async function POST(request) {
     // Verification mail
     // await sendEmail({ email, emailType: "VERIFY", userId: userData._id });
 
-    return NextResponse.json({
-      message: "User registered successfully",
-      success: true,
-      userData
-    });
+    return NextResponse.json({message: "User registered successfully"});
 
   } catch (error) {
     console.error(error); // Log the error for debugging

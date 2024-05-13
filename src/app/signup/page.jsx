@@ -26,9 +26,10 @@ const Signup = () => {
         body: JSON.stringify(data)
       });
       let res = await response.json();
-      if(res.message === "User already exist"){
+      if(res.message === "User already exists"){
         setError("email", { type: "manual", message: "Email already exists" });
-      } else {
+      } 
+      else if(res.message === "User registered successfully") {
         console.log("registered");
         setSuccessfull(true);
         clearErrors();
