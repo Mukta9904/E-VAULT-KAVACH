@@ -3,7 +3,7 @@ import { User, PasswordFolder, PaymentFolder, KeyFolder } from "@/models/userMod
 import { NextResponse } from "next/server";
 import { encryptPassword } from "@/helpers/encryptPassword";
 import { randomBytes } from "crypto";
-
+import jwt from 'jsonwebtoken'
 connection();
 
 export async function POST(request) {
@@ -48,9 +48,15 @@ export async function POST(request) {
      await newKey.save()
     // Verification mail
     // await sendEmail({ email, emailType: "VERIFY", userId: userData._id });
-
-    return NextResponse.json({message: "User registered successfully"});
-
+    const tokenData = {
+      id : newUser._id
+     }
+       const token = jwt.sign( tokenData , process.env.JWT_SECRET, { expiresIn: "1d" })
+       const response = NextResponse.json({message:"User registered successfully"}, {success:true})
+       response.cookies.set("token", token,{
+          httpOnly: true
+       })
+       return response       
   } catch (error) {
     console.error(error); // Log the error for debugging
     return NextResponse.json({

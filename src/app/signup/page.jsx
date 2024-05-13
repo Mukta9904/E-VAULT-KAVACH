@@ -3,8 +3,10 @@ import React from 'react'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 const Signup = () => {
+  const router = useRouter()
   const [successfull, setSuccessfull] = useState(false)
   const [showPassword, setShowPassword] = useState(true);
   const [loading, setLoading] = useState(false) // New state for loading status
@@ -33,6 +35,7 @@ const Signup = () => {
         console.log("registered");
         setSuccessfull(true);
         clearErrors();
+        router.replace("/profile")
       }
     } catch (error) {
       console.error(error.message);
