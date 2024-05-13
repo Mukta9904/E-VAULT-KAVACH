@@ -83,7 +83,7 @@ const PaymentForm = (props) => {
       await navigator.clipboard.writeText(content);
       console.log("Content copied to clipboard");
     } catch (err) {
-      console.error("Failed to copy: ", err);
+      console.error("Failed to copy:" , err);
     }
   };
   const currentYear = new Date().getFullYear();
@@ -247,10 +247,10 @@ const PaymentForm = (props) => {
           )}
         </div>
 
-        {/* Card Holder"s Name */}
+        {/* Card Holders Name */}
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            Card Holder"s Name
+            Card Holders Name
           </label>
           <div className="relative">
           <input
