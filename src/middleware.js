@@ -1,35 +1,29 @@
-import { NextResponse } from 'next/server'
-import jwt from 'jsonwebtoken';
+import { NextResponse } from 'next/server';
 
-// This function can be marked `async` if using `await` inside
-export function middleware(request) {
+export async function middleware(request) {
+  const path = request.nextUrl.pathname;
+  const isPublic = [
+    "/login",
+    "/signup",
+    "/varifyemail",
+    "/forgotEmail",
+    "/forgotpassword"
+  ].includes(path);
 
-const path = request.nextUrl.pathname
+  const token = request.cookies.get("token")?.value || '';
 
-const isPublic = path === "/login" || path === "/signup" || path === "/varifyemail" || path === "/forgotEmail" || path === "/forgotpassword"
-const token = request.cookies.get("token")?.value || ''
-try {
-  const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-  // Attach the decoded token to the request for later use
-  request.userId = decodedToken.id;
-} catch (error) {
-  // Handle the error appropriately
-  console.error(error);
-  return new Response(JSON.stringify({
-    error: error.message || 'Invalid token',
-  }), { status: 401, headers: { 'Content-Type': 'application/json' } });
+  if (isPublic && token) {
+    // If the user is trying to access a public route and has a token, redirect to profile
+    return NextResponse.redirect(new URL('/profile', request.url));
+  } else if (!isPublic && !token) {
+    // If the user is trying to access a protected route without a token, redirect to login
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+
+  // If none of the above conditions are met, continue with the request
+  return NextResponse.next();
 }
 
-if(isPublic && token){
-  return NextResponse.redirect(new URL('/profile', request.url))
-}
-if(!isPublic && !token){
-  return NextResponse.redirect(new URL('/login', request.url))
-}
-}
- 
-
-// See "Matching Paths" below to learn more
 export const config = {
-  matcher:["/login", "/signup", "/varifyemail", "/forgotpassword","/forgotEmail"],
-}
+  matcher: ["/login", "/signup", "/varifyemail", "/forgotpassword", "/forgotEmail", "/profile/:params"]
+};

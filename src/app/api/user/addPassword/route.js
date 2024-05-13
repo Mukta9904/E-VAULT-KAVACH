@@ -8,7 +8,7 @@ connection();
 
 export async function POST(request) {
   try {
-    const userId = request.userId
+    const userId = await getTokenData(request)
     const reqBody = await request.json();
     const {  siteName,loginId, password, siteUrl  } = reqBody;
     const keyFolderData = await KeyFolder.findOne({userId: userId})
