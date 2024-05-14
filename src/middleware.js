@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 export async function middleware(request) {
   const path = request.nextUrl.pathname;
   const isPublic = [
+    "/",
     "/login",
     "/signup",
     "/varifyemail",
@@ -25,5 +26,5 @@ export async function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/login", "/signup", "/varifyemail", "/forgotpassword", "/forgotEmail", "/profile","/profile/payments"]
+  matcher: ["/", "/login", "/signup", "/varifyemail", "/forgotpassword", "/forgotEmail", "/profile","/profile/payments"]
 };
