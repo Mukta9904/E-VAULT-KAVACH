@@ -10,7 +10,7 @@ export async function GET(request) {
     const response = NextResponse.json({ message: "Logout successful", success: true });
 
     // Set the token cookie to an empty value with an expiry date in the past to invalidate it
-    response.cookies.set("token", "", {
+    await response.cookies.set("token", "", {
       httpOnly: true,
       expires: new Date(0)
     });
