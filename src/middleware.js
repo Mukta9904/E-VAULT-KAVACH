@@ -12,7 +12,7 @@ export async function middleware(request) {
   ].includes(path);
 
   const token = request.cookies.get("token")?.value || '';
-
+  console.log(token);
   if (isPublic && token) {
     // If the user is trying to access a public route and has a token, redirect to profile
     return NextResponse.redirect(new URL('/profile', request.url));
