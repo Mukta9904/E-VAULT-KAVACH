@@ -14,7 +14,7 @@ export async function GET(request) {
       httpOnly: true,
       expires: new Date(0)
     });
-
+     console.log(response);
     // Return the response
     return response;
   } catch (error) {

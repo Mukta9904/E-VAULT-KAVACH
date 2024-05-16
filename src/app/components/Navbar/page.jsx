@@ -23,6 +23,7 @@ const Navbar = () => {
       const handleLogout = async ()=>{
           let a = await fetch("/api/user/logout", {method:"GET"}) 
           let res = await a.json()
+          console.log(res.message);
           if(res.message === "Logout successful"){
               router.replace("/login")
           }
