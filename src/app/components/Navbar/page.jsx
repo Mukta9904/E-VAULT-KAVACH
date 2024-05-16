@@ -12,7 +12,7 @@ const Navbar = () => {
         let res = await a.json();
         // Check if the user data is not present, then redirect to login
         if (!res.data) {
-          router.reload("/profile");
+          router.replace("/login");
         } else {
           setuser(res.data);
         }

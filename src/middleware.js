@@ -17,7 +17,7 @@ export async function middleware(request) {
     // If the user is trying to access a public route and has a token, redirect to profile
     return NextResponse.redirect(new URL('/profile', request.url));
   } 
-  else if (!isPublic && token==="") {
+  else if (!isPublic && !token) {
     // If the user is trying to access a protected route without a token, redirect to login
     return NextResponse.redirect(new URL('/login', request.url));
   }
